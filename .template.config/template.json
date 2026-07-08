@@ -9,8 +9,8 @@
     "FAF",
     "Clean Architecture"
   ],
-  "identity": "Faf.Templates.WebApi",
-  "groupIdentity": "Faf.Templates.WebApi",
+  "identity": "Fafp.Templates.WebApi",
+  "groupIdentity": "Fafp.Templates.WebApi",
   "name": "Firefly AI Flow Platform - Web API Microservice",
   "shortName": "faf-webapi",
   "description": "Production-ready ASP.NET Core 10 microservice template with Clean Architecture, Result Pattern, Serilog, OpenTelemetry, JWT, Health Checks, and 200+ tests.",

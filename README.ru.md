@@ -16,7 +16,7 @@ Production-ready шаблон для создания ASP.NET Core 10 микро
 
 ```bash
 # Установить шаблон
-dotnet new install Faf.Templates.WebApi
+dotnet new install Fafp.Templates.WebApi
 
 # Создать проект
 dotnet new faf-webapi -n MyService

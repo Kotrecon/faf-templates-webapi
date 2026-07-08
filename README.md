@@ -16,7 +16,7 @@ Production-ready template for creating ASP.NET Core 10 microservices.
 
 ```bash
 # Install template
-dotnet new install Faf.Templates.WebApi
+dotnet new install Fafp.Templates.WebApi
 
 # Create project
 dotnet new faf-webapi -n MyService

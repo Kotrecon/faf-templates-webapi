@@ -13,8 +13,8 @@
     <EnableDefaultItems>false</EnableDefaultItems>
     
     <!-- ═══════ NuGet metadata ═══════ -->
-    <PackageId>Faf.Templates.WebApi</PackageId>
-    <Version>1.1.0</Version>
+    <PackageId>Fafp.Templates.WebApi</PackageId>
+    <Version>1.0.1</Version>
     <Authors>Kotrecon</Authors>
     <Company>Kotrecon</Company>
     <Description>Production-ready ASP.NET Core 10 microservice template with Clean Architecture, Result Pattern, Serilog, OpenTelemetry, JWT, Health Checks, Scalar UI, and 200+ tests.</Description>
