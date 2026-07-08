@@ -1,48 +1,48 @@
-# Quick Start
+# Быстрый старт
 
-## Installing the Template
+## Установка шаблона
 
-From NuGet.org:
+Из NuGet.org:
 
 ```bash
 dotnet new install Faf.Templates.WebApi
 ```
 
-From a local feed:
+Из локального фида:
 
 ```bash
 dotnet new install Faf.Templates.WebApi --source E:\projects\shared\.nuget-feed\templates
 ```
 
-## Creating a Project
+## Создание проекта
 
 ```bash
-# Basic
+# Базовый
 dotnet new faf-webapi -n OrderService
 
-# With parameters
+# С параметрами
 dotnet new faf-webapi -n PaymentService \
     --port 8082 \
-    --author "Ivan Petrov" \
-    --description "Payment processing service"
+    --author "Иван Петров" \
+    --description "Сервис обработки платежей"
 
-# Without tests
+# Без тестов
 dotnet new faf-webapi -n SimpleService --no-tests
 ```
 
-## Running
+## Запуск
 
 ```bash
 cd OrderService
 dotnet run
 ```
 
-API is available at `http://localhost:8080`, health checks at `http://localhost:8081`.
+API доступен на `http://localhost:8080`, health checks на `http://localhost:8081`.
 
-## Verification
+## Проверка
 
 ```bash
-# Scalar UI (OpenAPI documentation)
+# Scalar UI (OpenAPI документация)
 http://localhost:8080/scalar
 
 # Health check

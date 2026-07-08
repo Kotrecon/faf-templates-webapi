@@ -1,41 +1,41 @@
-# Testing
+# Тестирование
 
-## Running Tests
+## Запуск тестов
 
 ```bash
 cd MyService.Tests
 dotnet test
 ```
 
-## Types of Tests
+## Типы тестов
 
-### Unit Tests
+### Unit-тесты
 
-- Configuration/Options — Options pattern validation
-- Contracts/Dto — DTO validation
-- Extensions — middleware and DI
-- HealthChecks — health checks
+- Configuration/Options — валидация Options pattern
+- Contracts/Dto — валидация DTO
+- Extensions — middleware и DI
+- HealthChecks — проверки здоровья
 
-### Integration Tests
+### Integration-тесты
 
 - AuthenticationTests — JWT auth
 - AuthorizationTests — policy-based auth
-- CorrelationIdE2ETests — end-to-end correlation ID
+- CorrelationIdE2ETests — сквозной correlation ID
 - MetadataEndpointTests — endpoint /api/metadata
-- DevTokenEndpointTests — test token generation
+- DevTokenEndpointTests — генерация тестовых токенов
 
-## Code Coverage
+## Покрытие кода
 
 ```bash
 dotnet test --collect:"XPlat Code Coverage" \
     --settings coverlet.runsettings
 ```
 
-Report at `TestResults/coverage.cobertura.xml`.
+Отчёт в `TestResults/coverage.cobertura.xml`.
 
 ## TestWebApplicationFactory
 
-Used for integration tests:
+Используется для integration-тестов:
 
 ```csharp
 [Fact]

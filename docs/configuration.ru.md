@@ -1,8 +1,8 @@
-# Configuration
+# Конфигурация
 
 ## appsettings.json
 
-### Basic settings
+### Основные настройки
 
 ```json
 {
@@ -119,9 +119,9 @@
 }
 ```
 
-## Environment variables
+## Переменные окружения
 
-All settings can be overridden via environment variables:
+Все настройки можно переопределить через env vars:
 
 - `AppSettings__Port=8082`
 - `Jwt__Key=NewSecretKey`

@@ -90,6 +90,13 @@
       "datatype": "bool",
       "description": "Include test project.",
       "defaultValue": "true"
+    },
+    "ServiceHost": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Service host (used in nginx example).",
+      "replaces": "SERVICE_HOST_PLACEHOLDER",
+      "defaultValue": "api.example.com"
     }
   },
 

@@ -1,8 +1,8 @@
 # 🔥 FAF Web API Template
 
-Production-ready шаблон для создания ASP.NET Core 10 микросервисов.
+Production-ready template for creating ASP.NET Core 10 microservices.
 
-## Быстрый старт
+## Quick Start
 
 ```bash
 dotnet new install Faf.Templates.WebApi
@@ -11,18 +11,20 @@ cd MyService
 dotnet run
 ```
 
-## Что внутри
+## What's Inside
 
 - Clean Architecture
-- Result Pattern (типобезопасные ошибки)
+- Result Pattern (type-safe errors)
 - Serilog + OpenTelemetry
 - JWT Authentication
 - Health Checks (Liveness + Readiness)
-- 202 теста (TUnit)
+- 202 tests (TUnit)
 
-## Навигация
+## Navigation
 
-- [Быстрый старт](quickstart.md)
-- [Конфигурация](configuration.md)
-- [Тестирование](testing.md)
+- [Quick Start](quickstart.md)
+- [Configuration](configuration.md)
+- [Testing](testing.md)
 - [Roadmap](roadmap.md)
+
+---

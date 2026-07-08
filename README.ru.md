@@ -1,4 +1,4 @@
-# Firefly AI Flow Platform — Web API Template
+# Firefly AI Flow Platform — Шаблон Web API
 
 [🇬🇧 English](README.md) | [🇷🇺 Русский](README.ru.md)
 
@@ -26,12 +26,40 @@ cd MyService
 dotnet run
 ```
 
+## Параметры шаблона
+
+| Параметр             | По умолчанию                        | Описание                                |
+| -------------------- | ----------------------------------- | --------------------------------------- |
+| `-n, --name`         | (имя папки)                         | Имя проекта (заменяет `WebApiTemplate`) |
+| `--Port`             | `8080`                              | HTTP порт сервиса                       |
+| `--Author`           | `Kotrecon`                          | Имя автора                              |
+| `--AuthorEmail`      | `ermakov_k@mail.ru`                 | Email автора                            |
+| `--AuthorUrl`        | `https://github.com/Kotrecon`       | URL автора (профиль GitHub)             |
+| `--Title`            | `Web API Service`                   | Заголовок сервиса (для OpenAPI/Scalar)  |
+| `--Version`          | `1.0.0`                             | Версия сервиса (semver)                 |
+| `--Description`      | `ASP.NET Core Web API microservice` | Описание сервиса                        |
+| `--ServiceHost`      | `api.example.com`                   | Хост сервиса (для nginx example)        |
+| `-I, --IncludeTests` | `true`                              | Включить тестовый проект                |
+
+**Пример со всеми параметрами:**
+
+```bash
+dotnet new faf-webapi -n OrderService \
+    --Port 8082 \
+    --Author "Иван Петров" \
+    --AuthorEmail "ivan@example.com" \
+    --Title "Order Service API" \
+    --Version "1.0.0" \
+    --Description "Сервис обработки заказов" \
+    --ServiceHost "orders.mycompany.com"
+```
+
 ## Что включено
 
 | Компонент              | Описание                                                            |
 | ---------------------- | ------------------------------------------------------------------- |
 | **Clean Architecture** | Controllers → Services → Repositories                               |
-| **Result Pattern**     | Типобезопасная обработка ошибок через `Fafp.Shared.ResultPattern`   |
+| **Result Pattern**     | Типобезопасная обработка ошибок через `Fafp.ResultPattern`          |
 | **Serilog**            | Структурированное логирование (JSON в prod, человекочитаемое в dev) |
 | **OpenTelemetry**      | Трейсинг, метрики, логи → OTLP endpoint                             |
 | **JWT Authentication** | Bearer-токены, policy-based авторизация                             |
@@ -41,44 +69,164 @@ dotnet run
 | **Correlation ID**     | Сквозной X-Correlation-Id (Guid v7)                                 |
 | **OpenAPI + Scalar**   | Scalar UI с JWT-авторизацией                                        |
 | **API Versioning**     | URL-based versioning (/api/v1/...)                                  |
+| **Response Caching**   | HTTP-кэширование для публичных endpoints                            |
 | **202 теста**          | Unit + Integration через TUnit + WebApplicationFactory              |
 
 ## Структура проекта
 
 ```bash
-MyService/
-├── MyService/
-│   ├── Configuration/Options/     ← Options pattern
-│   ├── Contracts/                 ← DTO, запросы, валидаторы
-│   ├── Controllers/               ← API endpoints
-│   ├── Extensions/                ← Middleware, DI расширения
-│   ├── HealthChecks/              ← Liveness + Readiness
-│   ├── Security/                  ← AuthN + AuthZ
-│   ├── Program.cs                 ← Точка входа
-│   └── appsettings*.json          ← Конфигурация
-├── MyService.Tests/
-│   ├── Configuration/
-│   ├── Contracts/
+webapi/
+├── .git/
+├── .gitignore
+├── .template.config/
+│   └── template.json
+├── docs/
+│   ├── architecture/
+│   │   ├── adr.md
+│   │   ├── adr.ru.md
+│   │   ├── api.md
+│   │   ├── api.ru.md
+│   │   ├── architecture.md
+│   │   ├── architecture.ru.md
+│   │   ├── auth-flow.md
+│   │   ├── auth-flow.ru.md
+│   │   ├── deployment.md
+│   │   ├── deployment.ru.md
+│   │   ├── observability.md
+│   │   ├── observability.ru.md
+│   │   ├── operability.md
+│   │   └── operability.ru.md
+│   ├── configuration.md
+│   ├── configuration.ru.md
+│   ├── index.md
+│   ├── index.ru.md
+│   ├── quickstart.md
+│   ├── quickstart.ru.md
+│   ├── roadmap.md
+│   ├── roadmap.ru.md
+│   ├── testing.md
+│   └── testing.ru.md
+├── Faf.Templates.WebApi.csproj
+├── global.json
+├── icon.png
+├── LICENSE
+├── README.md
+├── README.ru.md
+├── WebApiTemplate.slnx
+│
+├── WebApiTemplate/
+│   ├── Configuration/Options/
+│   │   ├── ApiMetadataOptions.cs
+│   │   ├── AppSettings.cs
+│   │   ├── ContactInfo.cs
+│   │   ├── JwtOptions.cs
+│   │   └── OpenTelemetryOptions.cs
+│   ├── Contracts/Dto/Request/Logging/
+│   │   ├── SetLogLevelRequest.cs
+│   │   └── SetLogLevelValidator.cs
 │   ├── Controllers/
+│   │   └── LoggingController.cs
 │   ├── Extensions/
+│   │   ├── ConfigurationExtensions.cs
+│   │   ├── ObservabilityExtensions.cs
+│   │   ├── CorrelationId/
+│   │   │   ├── CorrelationIdExtensions.cs
+│   │   │   └── CorrelationIdMiddleware.cs
+│   │   ├── Cors/
+│   │   │   └── CorsExtensions.cs
+│   │   ├── ExceptionHandler/
+│   │   │   ├── ExceptionHandlerExtensions.cs
+│   │   │   └── ExceptionHandlerMiddleware.cs
+│   │   ├── HealthChecks/
+│   │   │   └── HealthCheckExtensions.cs
+│   │   ├── RateLimiting/
+│   │   │   └── RateLimitingExtensions.cs
+│   │   └── RequestResponseLogging/
+│   │       ├── RequestResponseLoggingExtensions.cs
+│   │       └── RequestResponseLoggingMiddleware.cs
 │   ├── HealthChecks/
-│   ├── Integration/               ← E2E тесты
+│   │   ├── DatabaseHealthChecker.cs
+│   │   ├── IDatabaseHealthChecker.cs
+│   │   ├── MinimalResponseWriter.cs
+│   │   └── ReadinessHealthCheck.cs
 │   ├── Security/
-│   └── Helpers/
-├── MyService.slnx
-└── global.json
+│   │   ├── AuthenticationExtensions.cs
+│   │   └── AuthorizationExtensions.cs
+│   ├── Program.cs
+│   ├── WebApiTemplate.csproj
+│   ├── appsettings.json
+│   ├── appsettings.Development.json
+│   └── appsettings.Production.json
+│
+└── WebApiTemplate.Tests/
+    ├── Configuration/Options/
+    │   ├── ApiMetadataOptionsTests.cs
+    │   ├── AppSettingsTests.cs
+    │   ├── ContactInfoTests.cs
+    │   ├── JwtOptionsTests.cs
+    │   └── OpenTelemetryOptionsTests.cs
+    ├── Contracts/Dto/
+    │   └── SetLogLevelRequestTests.cs
+    ├── Controllers/
+    │   ├── ApiVersioningTests.cs
+    │   └── LoggingControllerTests.cs
+    ├── Extensions/
+    │   ├── ConfigurationExtensionsTests.cs
+    │   ├── ObservabilityExtensionsTests.cs
+    │   ├── CorrelationId/
+    │   │   └── CorrelationIdMiddlewareTests.cs
+    │   ├── Cors/
+    │   │   └── CorsExtensionsTests.cs
+    │   ├── ExceptionHandler/
+    │   │   └── ExceptionHandlerMiddlewareTests.cs
+    │   └── RequestResponseLogging/
+    │       └── RequestResponseLoggingMiddlewareTests.cs
+    ├── HealthChecks/
+    │   ├── MinimalResponseWriterTests.cs
+    │   └── ReadinessHealthCheckTests.cs
+    ├── Helpers/
+    │   └── RecursiveValidator.cs
+    ├── Integration/
+    │   ├── Infrastructure/
+    │   │   └── TestWebApplicationFactory.cs
+    │   ├── AuthenticationTests.cs
+    │   ├── AuthorizationTests.cs
+    │   ├── CorrelationIdE2ETests.cs
+    │   ├── DevTokenEndpointTests.cs
+    │   └── MetadataEndpointTests.cs
+    ├── Security/
+    │   ├── AuthenticationExtensionsTests.cs
+    │   └── AuthorizationExtensionsTests.cs
+    ├── WebApiTemplate.Tests.csproj
+    └── coverlet.runsettings
 ```
 
 ## Endpoints
 
-| Endpoint                | Метод | Описание                                     |
-| ----------------------- | ----- | -------------------------------------------- |
-| `/api/v1/logging/level` | GET   | Получить текущий уровень логирования         |
-| `/api/v1/logging/level` | PUT   | Изменить уровень логирования (runtime)       |
-| `/api/metadata`         | GET   | Информация о сервисе (кэшируется 1 час)      |
-| `/health`               | GET   | Liveness probe (порт 8081)                   |
-| `/health/ready`         | GET   | Readiness probe (порт 8081)                  |
-| `/dev/token`            | POST  | Генерация тестового JWT (только Development) |
+### API (порт 8080)
+
+| Endpoint                     | Метод | Описание                                     | Доступ      |
+| ---------------------------- | ----- | -------------------------------------------- | ----------- |
+| `/api/v1/logging/level`      | GET   | Получить текущий уровень логирования         | AuditViewer |
+| `/api/v1/logging/level`      | PUT   | Изменить уровень логирования (runtime)       | AdminOnly   |
+| `/api/v1/logging/categories` | GET   | Список категорий с overrides                 | AuditViewer |
+| `/api/metadata`              | GET   | Информация о сервисе (кэш 1 час)             | Анонимный   |
+| `/dev/token`                 | POST  | Генерация тестового JWT (только Development) | Анонимный   |
+
+### Health Checks (порт 8081 — только внутренняя сеть)
+
+| Endpoint        | Метод | Описание              | Доступ     |
+| --------------- | ----- | --------------------- | ---------- |
+| `/health/live`  | GET   | Liveness probe        | Внутренний |
+| `/health/ready` | GET   | Readiness probe       | Внутренний |
+| `/health`       | GET   | Агрегированный статус | Внутренний |
+
+### OpenAPI (только Development)
+
+| URL                                     | Описание                               |
+| --------------------------------------- | -------------------------------------- |
+| `http://localhost:8080/scalar/v1`       | Scalar UI (интерактивная документация) |
+| `http://localhost:8080/openapi/v1.json` | OpenAPI 3.1 документ                   |
 
 ## Конфигурация
 
@@ -86,6 +234,12 @@ MyService/
 
 ```json
 {
+  "Kestrel": {
+    "Endpoints": {
+      "Api": { "Url": "http://0.0.0.0:8080" },
+      "Health": { "Url": "http://0.0.0.0:8081" }
+    }
+  },
   "AppSettings": {
     "ServiceName": "MyService",
     "Port": 8080
@@ -114,6 +268,14 @@ MyService/
 }
 ```
 
+### Переменные окружения
+
+| Переменная                | Обязательно | Описание                                              |
+| ------------------------- | ----------- | ----------------------------------------------------- |
+| `ASPNETCORE_ENVIRONMENT`  | Да          | `Production` / `Development`                          |
+| `Jwt__Key`                | Да          | JWT ключ подписи (минимум 32 символа)                 |
+| `OpenTelemetry__Endpoint` | Нет         | OTLP endpoint (по умолчанию: `http://localhost:4317`) |
+
 ## Тестирование
 
 ```bash
@@ -125,7 +287,7 @@ dotnet test
 
 ## Зависимости
 
-- `Fafp.Shared.ResultPattern` 1.0.0 — типобезопасная обработка ошибок
+- `Fafp.ResultPattern` 1.0.0 — типобезопасная обработка ошибок
 - `Serilog.AspNetCore` — структурированное логирование
 - `OpenTelemetry.*` — трейсинг и метрики
 - `Microsoft.AspNetCore.Authentication.JwtBearer` — JWT
