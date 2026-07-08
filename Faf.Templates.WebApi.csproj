@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackageType>Template</PackageType>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    
+    <!-- ═══════ Отключаем автоподхват файлов ═══════ -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    
+    <!-- ═══════ NuGet metadata ═══════ -->
+    <PackageId>Faf.Templates.WebApi</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Kotrecon</Authors>
+    <Company>Kotrecon</Company>
+    <Description>Production-ready ASP.NET Core 10 microservice template with Clean Architecture, Result Pattern, Serilog, OpenTelemetry, JWT, Health Checks, Scalar UI, and 200+ tests.</Description>
+    <PackageTags>dotnet-new;templates;aspnetcore;microservice;faf;firefly-ai-flow</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Kotrecon/faf-templates-webapi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Kotrecon/faf-templates-webapi</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright © Kotrecon 2026</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    
+    <!-- ═══════ Build quality ═══════ -->
+    <IncludeSymbols>false</IncludeSymbols>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  
+  <!-- ═══════ Package artifacts ═══════ -->
+  <ItemGroup>
+    <!-- Все файлы шаблона → в content/ внутри пакета -->
+    <Content Include="**\*" 
+             Exclude="**\bin\**;**\obj\**;**\.vs\**;**\.vscode\**;**\.git\**;**\TestResults\**;**\logs\**;**\*.nupkg;**\*.snupkg;**\Faf.Templates.WebApi.csproj;**\README.md;**\README.ru.md;**\LICENSE;**\icon.png" />
+    
+    <!-- README, LICENSE, icon → в корень пакета (для NuGet.org) -->
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" Condition="Exists('LICENSE')" />
+    <None Include="icon.png" Pack="true" PackagePath="\" Condition="Exists('icon.png')" />
+  </ItemGroup>
+</Project>

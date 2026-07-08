@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Kotrecon <ermakov_k@mail.ru>",
+  "classifications": [
+    "Web",
+    "API",
+    "Microservice",
+    "ASP.NET Core",
+    "FAF",
+    "Clean Architecture"
+  ],
+  "identity": "Faf.Templates.WebApi",
+  "groupIdentity": "Faf.Templates.WebApi",
+  "name": "Firefly AI Flow Platform - Web API Microservice",
+  "shortName": "faf-webapi",
+  "description": "Production-ready ASP.NET Core 10 microservice template with Clean Architecture, Result Pattern, Serilog, OpenTelemetry, JWT, Health Checks, and 200+ tests.",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "WebApiTemplate",
+  "preferNameDirectory": true,
+
+  "symbols": {
+    "Author": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Author name (used in ApiMetadata and README).",
+      "replaces": "AUTHOR_PLACEHOLDER",
+      "defaultValue": "Kotrecon"
+    },
+    "AuthorEmail": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Author email.",
+      "replaces": "AUTHOR_EMAIL_PLACEHOLDER",
+      "defaultValue": "ermakov_k@mail.ru"
+    },
+    "AuthorUrl": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Author URL (GitHub profile).",
+      "replaces": "AUTHOR_URL_PLACEHOLDER",
+      "defaultValue": "https://github.com/Kotrecon"
+    },
+    "AuthorDescription": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Author description",
+      "replaces": "AUTHOR_DESC_PLACEHOLDER",
+      "defaultValue": "Solution Architect from Saint Petersburg. Specialization: .NET, C#, JS, Python, AI/ML, RAG, Agents, DevOps, GitHub, GitLab, CI/CD, Industrial Automation, Industrial Software, DB, PostgreSQL."
+    },
+    "AuthorDescriptionRu": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Author description ru",
+      "replaces": "AUTHOR_DESC_RU_PLACEHOLDER",
+      "defaultValue": "Архитектор решений из Санкт-Петербурга. Специализация: .NET, C#, JS, Python, AI/ML, RAG, Агенты, DevOps, GitHub, GitLab, CI/CD, АСУ ТП, Промышленное ПО, DB, PostgreSQL."
+    },
+    "Title": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Service title (used in ApiMetadata).",
+      "replaces": "SERVICE_TITLE_PLACEHOLDER",
+      "defaultValue": "Web API Service"
+    },
+    "Version": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Service version (used in ApiMetadata).",
+      "replaces": "SERVICE_VERSION_PLACEHOLDER",
+      "defaultValue": "1.0.0"
+    },
+    "Description": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Service description (used in ApiMetadata).",
+      "replaces": "SERVICE_DESCRIPTION_PLACEHOLDER",
+      "defaultValue": "ASP.NET Core Web API microservice"
+    },
+    "Port": {
+      "type": "parameter",
+      "datatype": "int",
+      "description": "HTTP port for the service (replaces 8080).",
+      "replaces": "8080",
+      "defaultValue": "8080"
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include test project.",
+      "defaultValue": "true"
+    }
+  },
+
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!IncludeTests)",
+          "exclude": ["WebApiTemplate.Tests/**/*"]
+        },
+        {
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/.vs/**",
+            "**/.vscode/**",
+            "**/TestResults/**",
+            "**/logs/**",
+            "**/*.user",
+            "**/*.suo",
+            "**/.git/**",
+            "**/.template.config/**"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "primaryOutputs": [
+    { "path": "WebApiTemplate/WebApiTemplate.csproj" },
+    {
+      "condition": "(IncludeTests)",
+      "path": "WebApiTemplate.Tests/WebApiTemplate.Tests.csproj"
+    }
+  ],
+
+  "postActions": [
+    {
+      "actionId": "210D435B-A787-4AA0-A4C5-260A025155D7",
+      "description": "Restore NuGet packages",
+      "continueOnError": true
+    }
+  ]
+}

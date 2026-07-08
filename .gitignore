@@ -1,0 +1,21 @@
+# Сборка
+bin/
+obj/
+*.user
+*.suo
+
+# Тесты
+TestResults/
+logs/
+
+# Пакеты (не коммитим)
+*.nupkg
+*.snupkg
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Локальный фид
+.nuget-feed/
