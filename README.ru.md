@@ -318,11 +318,11 @@ dotnet test
 
 ## Автор
 
-**AUTHOR_PLACEHOLDER**
+**Kotrecon**
 
-AUTHOR_DESC_RU_PLACEHOLDER
+Архитектор решений из Санкт-Петербурга. Специализация: .NET, C#, JS, Python, AI/ML, RAG, Агенты, DevOps, GitHub, GitLab, CI/CD, АСУ ТП, Промышленное ПО, DB, PostgreSQL.
 
-[Email](mailto:AUTHOR_EMAIL_PLACEHOLDER) | [GitHub](AUTHOR_URL_PLACEHOLDER)
+[Email](mailto:ermakov_k@mail.ru) | [GitHub](https://github.com/Kotrecon)
 
 ---
 
