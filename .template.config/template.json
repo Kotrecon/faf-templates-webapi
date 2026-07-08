@@ -118,7 +118,14 @@
             "**/*.user",
             "**/*.suo",
             "**/.git/**",
-            "**/.template.config/**"
+            "**/.template.config/**",
+            "docs/*.md",
+            "docs/*.html",
+            "README.md",
+            "README.ru.md",
+            "LICENSE",
+            "icon.png",
+            "Faf.Templates.WebApi.csproj"
           ]
         }
       ]
